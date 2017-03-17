@@ -28,7 +28,11 @@ public class UsuarioBean {
 		dao.remove(usuario);
 		this.usuarios = dao.lista();
 	}
-
+	
+	public void altera() {
+		UsuarioDao dao = new UsuarioDao();
+		dao.atualiza(usuario);
+	}
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}

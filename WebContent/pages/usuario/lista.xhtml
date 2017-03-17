@@ -12,7 +12,16 @@
 <h:body>
 	<t:saveState value="#{usuarioBean.usuarios}" />
 	<h:form>
-		<h:commandButton action="#{usuarioBean.lista}" value="Listar" />
+		<h:commandButton action="#{usuarioBean.lista}" value="Listar" />&#160;
+		<h:column>
+			<h:commandLink value="Novo" action="novo" />
+
+		</h:column>
+		&#160;
+		<h:column>
+
+			<h:commandLink value="Voltar" action="lista" />
+		</h:column>
 
 		<h:dataTable value="#{usuarioBean.usuarios}" var="usuario">
 			<h:column>
@@ -29,8 +38,15 @@
 		</h:column>
 			<h:column>
 				<f:facet name="header"> Ações</f:facet>
+
 				<h:commandLink value="remover"
 					action="#{usuarioBean.remove(usuario)}" />
+&#160;
+				<h:commandLink value="alterar" action="edita">
+					<f:setPropertyActionListener value="#{usuario}"
+						target="#{usuarioBean.usuario}"></f:setPropertyActionListener>
+				</h:commandLink>
+
 			</h:column>
 
 
