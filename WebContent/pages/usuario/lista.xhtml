@@ -1,57 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 <h:head>
-	<title>Usuários Cadastrados</title>
+	<title>Sistema de controle de Bugs - Bug Tracker</title>
+	<h:outputStylesheet library="css" name="app.css" />	
 </h:head>
-<h:body>
-	<t:saveState value="#{usuarioBean.usuarios}" />
-	<h:form>
-		<h:commandButton action="#{usuarioBean.lista}" value="Listar" />&#160;
-		<h:column>
-			<h:commandLink value="Novo" action="novo" />
-
-		</h:column>
-		&#160;
-		<h:column>
-
-			<h:commandLink value="Voltar" action="lista" />
-		</h:column>
-
-		<h:dataTable value="#{usuarioBean.usuarios}" var="usuario">
-			<h:column>
-				<f:facet name="header"> ID</f:facet>
-			#{usuario.id}
-		</h:column>
-			<h:column>
-				<f:facet name="header"> Nome</f:facet>
-			#{usuario.nome}
-		</h:column>
-			<h:column>
-				<f:facet name="header"> Login</f:facet>
-			#{usuario.login}
-		</h:column>
-			<h:column>
-				<f:facet name="header"> Ações</f:facet>
-
-				<h:commandLink value="remover"
-					action="#{usuarioBean.remove(usuario)}" />
-&#160;
-				<h:commandLink value="alterar" action="edita">
-					<f:setPropertyActionListener value="#{usuario}"
-						target="#{usuarioBean.usuario}"></f:setPropertyActionListener>
-				</h:commandLink>
-
-			</h:column>
-
-
-		</h:dataTable>
-	</h:form>
-</h:body>
-
+	<h:body>
+		<div id="cabecalho">
+			<ul id="menu-principal">
+				<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+			</ul>
+		</div>
+		<div id="conteudo">
+			<div id="container">
+				<t:saveState value="#{usuarioBean.usuarios}" />
+				<h1>Lista de Usuários</h1>
+				<h:form>					
+						<div class="acoes-principais">
+						
+							<h:column>
+								<h:commandLink value="Novo" action="novo" />
+							</h:column>	&#160;
+							
+							<h:column>
+								<h:commandButton action="#{usuarioBean.lista}" value="Listar" />&#160;
+							</h:column>
+							
+						</div>
+						
+					<h:dataTable value="#{usuarioBean.usuarios}" var="usuario" styleClass="dados" rowClasses="impar,par">
+					
+						<h:column>
+							<f:facet name="header"> ID</f:facet>#{usuario.id}
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header"> Nome</f:facet>#{usuario.nome}
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header"> Login</f:facet>	#{usuario.login}
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header"> Ações</f:facet>							
+								<h:commandLink value="remover"	action="#{usuarioBean.remove(usuario)}" />&#160;
+								<h:commandLink value="alterar" action="edita">								
+									<f:setPropertyActionListener value="#{usuario}"	target="#{usuarioBean.usuario}"></f:setPropertyActionListener>
+								</h:commandLink>								
+						</h:column>						
+						
+					</h:dataTable>
+				</h:form>
+			</div>
+		</div>
+		<div id="rodape">
+			<div class="rodape-bar">
+				<strong>Bug Trucker</strong>- Controle de Bugs | TriadWorks
+			</div>
+		</div>
+	</h:body>
 </html>

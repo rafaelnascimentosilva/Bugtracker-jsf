@@ -5,24 +5,45 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Cadastro de Usuário</title>
+	<title>Sistema de controle de Bugs - Bug Tracker</title>
+	<h:outputStylesheet library="css" name="app.css" />
+
 </h:head>
 
 <h:body>
-	<h:form>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Nome" for="nome" />
-			<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+	<div id="cabecalho">
+		<ul id="menu-principal">
+			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+		</ul>
+	</div>
 
-			<h:outputLabel value="Login" for="login" />
-			<h:inputText id="login" value="#{usuarioBean.usuario.login}" />
-
-			<h:outputLabel value="Senha" for="senha" />
-			<h:inputSecret id="senha" value="#{usuarioBean.usuario.senha}" />
-
-			<h:commandButton value="Salvar" action="#{usuarioBean.adiciona}"/>
-			<h:commandLink value="Voltar" action="lista"/>
-		</h:panelGrid>
-	</h:form>
+	<div id="conteudo">
+		<div id="container">
+			<h1>Novo Usuário</h1>
+				<h:form>
+				
+					<h:outputLabel value="Nome" for="nome" />
+					<h:inputText id="nome" value="#{usuarioBean.usuario.nome}"/>
+	
+					<h:outputLabel value="Login" for="login" />
+					<h:inputText id="login" value="#{usuarioBean.usuario.login}" />
+	
+					<h:outputLabel value="Senha" for="senha" />
+					<h:inputSecret id="senha" value="#{usuarioBean.usuario.senha}" />
+					
+					<div class="acoes-principais">
+						<h:commandButton value="Salvar" action="#{usuarioBean.adiciona}" />
+						&#160;
+						<h:commandLink value="Voltar" action="lista" />
+					</div>	
+					
+				</h:form>
+			</div>
+		</div>
+	<div id="rodape">
+		<div class="rodape-bar">
+			<strong>Bug Trucker</strong>- Controle de Bugs | TriadWorks
+		</div>
+	</div>
 </h:body>
 </html>
