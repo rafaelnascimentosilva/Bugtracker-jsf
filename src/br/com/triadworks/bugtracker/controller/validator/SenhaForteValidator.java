@@ -14,7 +14,7 @@ public class SenhaForteValidator implements Validator {
 	public void validate(FacesContext ctx, UIComponent ui, Object value) throws ValidatorException {
 
 		String senha = value.toString();
-		if (!senha.matches("@")) {
+		if (!senha.contains("@")) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"O campo Senha não é forte o suficiente", "A senha deve ter de 5 a 12 caracteres"));
 		}
