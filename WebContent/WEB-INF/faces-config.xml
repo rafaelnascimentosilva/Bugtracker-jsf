@@ -8,4 +8,11 @@
 		br.com.triadworks.bugtracker.resources.Mensagens
 		</message-bundle>
 	</application>
+	
+	<lifecycle>
+		<phase-listener>
+		br.com.triadworks.bugtracker.controller.listener.CicloDeVidaListener
+		</phase-listener>
+	</lifecycle>
+	
 </faces-config>

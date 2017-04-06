@@ -16,11 +16,11 @@
 			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
 		</ul>
 	</div>
-<h:messages errorClass="errors" infoClass="notice"/>
+<h:messages id="mensagens" errorClass="errors" infoClass="notice"/>
 	<div id="conteudo">
 		<div id="container">
 			<h1>Novo Usuário</h1>
-			<h:form>
+			<h:form id="form">
 
 				<h:outputLabel value="Nome" for="nome" />
 				<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" required="true" label="Nome"/>
@@ -34,14 +34,18 @@
 
 				<h:outputLabel value="Senha" for="senha" />
 				<h:inputSecret id="senha" value="#{usuarioBean.usuario.senha}" required="true" label="Senha">
-				<f:validator validatorId="senhaForte"/>
-				<f:validateLength minimum="4" maximum="10"/>
+					<f:validator validatorId="senhaForte"/>
+					<f:validateLength minimum="4" maximum="10"/>
 				</h:inputSecret>
 
 				<div class="acoes-principais">
-					<h:commandButton value="Salvar" action="#{usuarioBean.adiciona}" />
+					<h:commandButton value="Salvar" action="#{usuarioBean.adiciona}" >
+						<f:ajax execute="@form" render="@form :mensagens" />
+					</h:commandButton>
 					&#160;
-					<h:commandLink value="Voltar" action="lista"  immediate="true"/>
+					<h:commandLink value="Voltar" action="lista"  immediate="true">
+						<f:ajax render="@form" execute="@form"/>
+					</h:commandLink>
 				</div>
 
 			</h:form>

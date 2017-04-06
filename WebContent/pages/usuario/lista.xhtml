@@ -15,19 +15,25 @@
 				<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
 			</ul>
 		</div>
+		<h:messages id="mensagens" errorClass="errors" infoClass="notice" />
 		<div id="conteudo">
 			<div id="container">
 				<t:saveState value="#{usuarioBean.usuarios}" />
 				<h1>Lista de Usuários</h1>
-				<h:form>					
+				<h:form id="form">					
 						<div class="acoes-principais">
 						
 							<h:column>
-								<h:commandLink value="Novo" action="novo" />
+								<h:commandLink value="Novo" action="novo" >
+								
+								</h:commandLink>
 							</h:column>	&#160;
 							
 							<h:column>
-								<h:commandButton action="#{usuarioBean.lista}" value="Listar" />&#160;
+								<h:commandButton action="#{usuarioBean.lista}" value="Listar" >
+								
+								<f:ajax render="@form" execute="@form"/>
+								</h:commandButton>&#160;
 							</h:column>
 							
 						</div>
@@ -48,8 +54,11 @@
 						
 						<h:column>
 							<f:facet name="header"> Ações</f:facet>							
-								<h:commandLink value="remover"	action="#{usuarioBean.remove(usuario)}" />&#160;
-								<h:commandLink value="alterar" action="edita">								
+								<h:commandLink value="remover"	action="#{usuarioBean.remove(usuario)}" >
+									<f:ajax render="@form :mensagens"/>
+								</h:commandLink>&#160;
+								<h:commandLink value="alterar" action="edita">		
+											
 									<f:setPropertyActionListener value="#{usuario}"	target="#{usuarioBean.usuario}"></f:setPropertyActionListener>
 								</h:commandLink>								
 						</h:column>						
