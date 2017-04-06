@@ -1,6 +1,7 @@
 package br.com.triadworks.bugtracker.controller;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import br.com.triadworks.bugtracker.modelo.Usuario;
@@ -14,18 +15,28 @@ public class LoginBean {
 	
 	private String login;
 	private String senha;
+	
+	@ManagedProperty("#{usuarioWeb}")
+	private UsuarioWeb usuarioWeb;
+
+	public UsuarioWeb getUsuarioWeb() {
+		return usuarioWeb;
+	}
+
+	public void setUsuarioWeb(UsuarioWeb usuarioWeb) {
+		this.usuarioWeb = usuarioWeb;
+	}
 
 	public String logar() {
 		Autenticador autenticador = new AutenticadorImpl();
 		Usuario usuario = autenticador.autentica(login, senha);
-		//boolean loginEhValido = (usuario != null);
-		//System.out.println("Login e senha são inválido? " + loginEhValido);
 		if (usuario != null) {
-			return "pages/usuario/lista";
+			usuarioWeb.loga(usuario);
+			return "pages/usuario/lista?faces-redirect=true";
 		} 
 		
 		new FacesUtils().adicionaMensagemDeErro("Login ou Senha inválidos!!!");
-		return "login";
+		return null;
 	}
 
 	public String getLogin() {
