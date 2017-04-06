@@ -12,20 +12,12 @@ import br.com.triadworks.bugtracker.util.FacesUtils;
 @ManagedBean
 @RequestScoped
 public class LoginBean {
-	
+
 	private String login;
 	private String senha;
-	
+
 	@ManagedProperty("#{usuarioWeb}")
 	private UsuarioWeb usuarioWeb;
-
-	public UsuarioWeb getUsuarioWeb() {
-		return usuarioWeb;
-	}
-
-	public void setUsuarioWeb(UsuarioWeb usuarioWeb) {
-		this.usuarioWeb = usuarioWeb;
-	}
 
 	public String logar() {
 		Autenticador autenticador = new AutenticadorImpl();
@@ -33,10 +25,23 @@ public class LoginBean {
 		if (usuario != null) {
 			usuarioWeb.loga(usuario);
 			return "pages/usuario/lista?faces-redirect=true";
-		} 
-		
+		}
+
 		new FacesUtils().adicionaMensagemDeErro("Login ou Senha inválidos!!!");
 		return null;
+	}
+
+	public String sair() {
+		usuarioWeb.desloga();
+		return "/login?faces-redirect=true";
+	}
+
+	public UsuarioWeb getUsuarioWeb() {
+		return usuarioWeb;
+	}
+
+	public void setUsuarioWeb(UsuarioWeb usuarioWeb) {
+		this.usuarioWeb = usuarioWeb;
 	}
 
 	public String getLogin() {

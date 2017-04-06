@@ -19,6 +19,9 @@ public class UsuarioWeb implements Serializable {
 	public void loga(Usuario usuario){
 		this.usuario = usuario;
 	}
+	public void desloga(){
+		this.usuario = null;
+	}
 	
 	public boolean isLogado(){
 		return this.usuario != null;

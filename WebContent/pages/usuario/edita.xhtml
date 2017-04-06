@@ -7,53 +7,38 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:t="http://myfaces.apache.org/tomahawk">
 
-<h:head>
-	<title>Sistema de controle de Bugs - Bug Tracker</title>
-	<h:outputStylesheet library="css" name="app.css" />
-</h:head>
-<h:body>
-	<t:saveState value="#{usuarioBean.usuario}" />
+<ui:composition template="/templates/template_principal.xhtml">
+	<ui:define name="corpo">
+		<t:saveState value="#{usuarioBean.usuario}" />
+		<h1>Editar Usuário</h1>
+		<h:form id="form">
+			<h:inputHidden value="#{usuarioBean.usuario.id}" />
 
-	<div id="cabecalho">
-		<ul id="menu-principal">
-			<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
-		</ul>
-	</div>
-<h:messages id="mensagens" errorClass="errors" infoClass="notice" />
-	<div id="conteudo">
-		<div id="container">
-			<h1>Editar Usuário</h1>
-			<h:form id="form">
-				<h:inputHidden value="#{usuarioBean.usuario.id}" />
+			<h:outputLabel value="Nome" for="nome" />
+			<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
 
-				<h:outputLabel value="Nome" for="nome" />
-				<h:inputText id="nome" value="#{usuarioBean.usuario.nome}" />
+			<h:outputLabel value="Login" for="login" />
+			<h:inputText id="login" value="#{usuarioBean.usuario.login}"
+				readonly="true" />
 
-				<h:outputLabel value="Login" for="login" />
-				<h:inputText id="login" value="#{usuarioBean.usuario.login}" readonly="true" />
-				
-				<h:outputLabel value="senha" for="senha"/>
-				<h:inputSecret value="#{usuarioBean.usuario.senha}" >
-					<f:validator validatorId="senhaForte"/>
-				</h:inputSecret>
+			<h:outputLabel value="senha" for="senha" />
+			<h:inputSecret value="#{usuarioBean.usuario.senha}" required="true"
+				label="senha">
+				<f:validator validatorId="senhaForte" />
+				<f:validateLength minimum="5" maximum="12" />
+			</h:inputSecret>
 
-				<div class="acoes-principais">
-					<h:commandButton value="Salvar" action="#{usuarioBean.altera}" >
-						<f:ajax execute="@form" render="@form :mensagens" />
-					</h:commandButton>
-					&#160;
-					<h:commandLink value="Voltar" action="lista"  immediate="true" >
-						<f:ajax render="@form" execute="@form"/>
-					</h:commandLink>
-				</div>
+			<div class="acoes-principais">
+				<h:commandButton value="Salvar" action="#{usuarioBean.altera}">
+					<f:ajax execute="@form" render="@form :mensagens" />
+				</h:commandButton>
+				&#160;
+				<h:commandLink value="Voltar" action="lista" immediate="true">
+				<!-- 	<f:ajax render="@form" execute="@form" />  caso ativado buga o logout-->
+				</h:commandLink>
+			</div>
 
-			</h:form>
-		</div>
-	</div>
-	<div id="rodape">
-		<div class="rodape-bar">
-			<strong>Bug Trucker</strong>- Controle de Bugs | TriadWorks
-		</div>
-	</div>
-</h:body>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
