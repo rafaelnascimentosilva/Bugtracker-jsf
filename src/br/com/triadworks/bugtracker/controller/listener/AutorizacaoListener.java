@@ -10,6 +10,11 @@ import br.com.triadworks.bugtracker.controller.UsuarioWeb;
 
 public class AutorizacaoListener implements PhaseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void afterPhase(PhaseEvent event) {
 		FacesContext context = event.getFacesContext();
