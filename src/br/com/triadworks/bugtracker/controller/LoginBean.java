@@ -15,12 +15,22 @@ public class LoginBean {
 
 	private String login;
 	private String senha;
+	@ManagedProperty("#{autenticador}")
+	private Autenticador autenticador;
+	
+	public Autenticador getAutenticador() {
+		return autenticador;
+	}
+
+	public void setAutenticador(Autenticador autenticador) {
+		this.autenticador = autenticador;
+	}
 
 	@ManagedProperty("#{usuarioWeb}")
 	private UsuarioWeb usuarioWeb;
 
 	public String logar() {
-		Autenticador autenticador = new AutenticadorImpl();
+		
 		Usuario usuario = autenticador.autentica(login, senha);
 		if (usuario != null) {
 			usuarioWeb.loga(usuario);

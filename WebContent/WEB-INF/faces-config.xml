@@ -5,8 +5,12 @@
 	version="2.2">
 	<application>
 		<message-bundle>
+		
 		br.com.triadworks.bugtracker.resources.Mensagens
 		</message-bundle>
+		<el-resolver>
+			org.springframework.web.jsf.el.SpringBeanFacesELResolver
+		</el-resolver>
 	</application>
 	
 	<lifecycle>
