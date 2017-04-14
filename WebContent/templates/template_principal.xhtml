@@ -14,13 +14,15 @@
 		<ui:insert name="cabecalho">
 			<ul id="menu-principal">
 				<li><h:link value="Usuário" outcome="/pages/usuario/lista" /></li>
+				<li><h:link value="Bugs" outcome="/pages/bug/lista" /></li>
 			</ul>
+			
 		</ui:insert>
 	</div>
 	<div id="user-info">
 		<h:form>
 				#{usuarioWeb.usuario.login}
-				<h:commandButton value="Sair" action="#{loginBean.sair}"/>
+				<h:commandButton value="Sair" action="#{loginBean.sair}" />
 		</h:form>
 	</div>
 	<h:messages id="mensagens" errorClass="errors" infoClass="notice" />
