@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
+<ui:composition template="/templates/template_principal.xhtml">
+	<ui:define name="corpo">
+		<h1>Novo Bug</h1>
+		<h:form id="form">
+			<h:outputLabel value="Sumário" for="sumario" />
+			<h:inputText value="#{bugBean.bug.sumario}" required="true"
+				label="Sumário"  id="sumario"/>
+
+			<h:outputLabel value="Descrição" for="descricao" />
+			<h:inputTextarea value="#{bugBean.bug.descricao}" required="true"
+				label="Descrição" cols="50" rows="10" id="descricao" />
+				
+			<h:outputLabel value="Status" for="status" />
+			<h:selectOneMenu id="status" value="#{bugBean.bug.status}">
+				<f:selectItems value="#{bugBean.todosOsStatus}" var="status" itemLabel="#{status}" itemValue="#{status}" />
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Responsável" for="responsavel" />
+			<h:selectOneMenu id="responsavel" value="#{bugBean.bug.responsavel.id}" required="true" label="Responsável">
+				<f:selectItem itemLabel="Selecione um usuário" noSelectionOption="true"/>
+				<f:selectItems value="#{usuarioDao.lista()}" var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario.id}" />
+			</h:selectOneMenu>
+			
+			<h:outputLabel value="Reportado em:" for="criadoEm" />
+			<h:inputText id="criadoEm" value="#{bugBean.bug.criadoEm}" required="true" label="criadoEm">
+				<f:convertDateTime pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			
+			<h:commandButton value="Salvar" action="#{bugBean.adiciona}">
+			
+			</h:commandButton>
+			
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
