@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:t="http://myfaces.apache.org/tomahawk">
+	xmlns:t="http://myfaces.apache.org/tomahawk"  
+	xmlns:p ="http://primefaces.org/ui" >
 <ui:composition template="/templates/template_principal.xhtml">
 	<ui:define name="corpo">
 		<h1>Novo Bug</h1>
@@ -29,9 +30,7 @@
 			</h:selectOneMenu>
 			
 			<h:outputLabel value="Reportado em:" for="criadoEm" />
-			<h:inputText id="criadoEm" value="#{bugBean.bug.criadoEm}" required="true" label="criadoEm">
-				<f:convertDateTime pattern="dd/MM/yyyy"/>
-			</h:inputText>
+		<p:calendar mask="true" id="criadoEm" value="#{bugBean.bug.criadoEm}" label="Reportado em" required="true" pattern="dd/MM/yyyy"/>
 			<div class="acoes-principais">
 				<h:commandButton value="Salvar" action="#{bugBean.adiciona}"/>		
 			
