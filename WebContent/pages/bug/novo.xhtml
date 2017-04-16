@@ -32,11 +32,11 @@
 			<h:inputText id="criadoEm" value="#{bugBean.bug.criadoEm}" required="true" label="criadoEm">
 				<f:convertDateTime pattern="dd/MM/yyyy"/>
 			</h:inputText>
+			<div class="acoes-principais">
+				<h:commandButton value="Salvar" action="#{bugBean.adiciona}"/>		
 			
-			<h:commandButton value="Salvar" action="#{bugBean.adiciona}">
-			
-			</h:commandButton>
-			
+				<h:commandLink value="Voltar" action="lista" immediate="true" />	
+			</div>
 		</h:form>
 
 	</ui:define>
