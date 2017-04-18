@@ -52,7 +52,9 @@
 					
 						<f:ajax render="@form :mensagens" />
 					</h:commandLink>&#160;
-							
+					<h:commandLink value="editar" action="edita" >
+						<f:setPropertyActionListener value="#{bug}" target="#{bugBean.bug}"></f:setPropertyActionListener>
+					</h:commandLink>		
 				</h:column>
 
 			</h:dataTable>

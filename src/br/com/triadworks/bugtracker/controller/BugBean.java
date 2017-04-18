@@ -45,6 +45,11 @@ public class BugBean {
 		new FacesUtils().adicionaMensagemDeSucesso("Bug removido com sucesso!!");
 	}
 
+	public void altera() {
+		dao.atualiza(bug);
+		new FacesUtils().adicionaMensagemDeSucesso("Bug atualizado com sucesso!!");
+	}
+
 	public List<Bug> getBugs() {
 		return bugs;
 	}
