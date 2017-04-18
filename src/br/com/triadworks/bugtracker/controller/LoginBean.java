@@ -1,42 +1,40 @@
 package br.com.triadworks.bugtracker.controller;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import br.com.triadworks.bugtracker.modelo.Usuario;
 import br.com.triadworks.bugtracker.service.Autenticador;
-import br.com.triadworks.bugtracker.service.AutenticadorImpl;
 import br.com.triadworks.bugtracker.util.FacesUtils;
+/* anotações JSF  */
+//@ManagedBean
+//@RequestScoped
 
-@ManagedBean
-@RequestScoped
+/* anotações Spring  */
+@Controller
+@Scope("request")
 public class LoginBean {
 
 	private String login;
 	private String senha;
-	@ManagedProperty("#{autenticador}")
+	// @ManagedProperty("#{autenticador}") JSF - remover gets - sets
 	private Autenticador autenticador;
-	
-	public Autenticador getAutenticador() {
-		return autenticador;
-	}
-
-	public void setAutenticador(Autenticador autenticador) {
-		this.autenticador = autenticador;
-	}
-
-	@ManagedProperty("#{usuarioWeb}")
+	// @ManagedProperty("#{usuarioWeb}") JSF - remover gets - sets
 	private UsuarioWeb usuarioWeb;
 
+	@Autowired
+	public LoginBean(Autenticador autenticador, UsuarioWeb usuarioWeb) {
+		this.autenticador = autenticador;
+		this.usuarioWeb = usuarioWeb;
+	}
+
 	public String logar() {
-		
 		Usuario usuario = autenticador.autentica(login, senha);
 		if (usuario != null) {
 			usuarioWeb.loga(usuario);
 			return "pages/usuario/lista?faces-redirect=true";
 		}
-
 		new FacesUtils().adicionaMensagemDeErro("Login ou Senha inválidos!!!");
 		return null;
 	}
@@ -44,14 +42,6 @@ public class LoginBean {
 	public String sair() {
 		usuarioWeb.desloga();
 		return "/login?faces-redirect=true";
-	}
-
-	public UsuarioWeb getUsuarioWeb() {
-		return usuarioWeb;
-	}
-
-	public void setUsuarioWeb(UsuarioWeb usuarioWeb) {
-		this.usuarioWeb = usuarioWeb;
 	}
 
 	public String getLogin() {
