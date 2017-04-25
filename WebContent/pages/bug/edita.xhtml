@@ -26,7 +26,8 @@
 			<h:outputLabel value="Responsável" for="responsavel" />
 			<h:selectOneMenu id="responsavel" value="#{bugBean.bug.responsavel.id}" required="true" label="Responsável">
 				<f:selectItem itemLabel="Selecione um usuário" noSelectionOption="true"/>
-				<f:selectItems value="#{usuarioDao.lista()}" var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario.id}" />
+			<!-- 	<f:selectItems value="#{usuarioDao.lista()}" var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario.id}" /> -->
+			 	<f:selectItems value="#{bugBean.usuarios}" var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario.id}" /> 
 			</h:selectOneMenu>
 			
 			<h:outputLabel value="Reportado em:" for="criadoEm" />

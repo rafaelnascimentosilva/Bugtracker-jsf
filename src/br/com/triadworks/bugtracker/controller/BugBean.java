@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
 import br.com.triadworks.bugtracker.dao.BugDao;
+import br.com.triadworks.bugtracker.dao.UsuarioDao;
 import br.com.triadworks.bugtracker.modelo.Bug;
 import br.com.triadworks.bugtracker.modelo.Status;
 import br.com.triadworks.bugtracker.modelo.Usuario;
@@ -19,10 +20,22 @@ public class BugBean {
 
 	@ManagedProperty("#{bugDao}")
 	private BugDao dao;
-
+	@ManagedProperty("#{usuarioDao}")
+	private UsuarioDao usuarioDao;
+	
 	private Bug bug = new Bug();
 
 	private List<Bug> bugs = new ArrayList<Bug>();
+	
+	private List<Usuario> usuarios;
+	
+	public UsuarioDao getUsuarioDao() {
+		return usuarioDao;
+	}
+
+	public void setUsuarioDao(UsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -48,6 +61,15 @@ public class BugBean {
 	public void altera() {
 		dao.atualiza(bug);
 		new FacesUtils().adicionaMensagemDeSucesso("Bug atualizado com sucesso!!");
+	}
+	
+	
+
+	public List<Usuario> getUsuarios() {
+		if (usuarios==null) {
+			this.usuarios = usuarioDao.lista();
+		}
+		return usuarios;
 	}
 
 	public List<Bug> getBugs() {
