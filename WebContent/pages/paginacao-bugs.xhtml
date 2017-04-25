@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p ="http://primefaces.org/ui" >
+<ui:composition template="/templates/template_principal.xhtml">
+	<ui:define name="corpo">
+		<t:saveState value="#{bugBean.bugs}" />
+		<h1>Paginação de Bugs</h1>
+		<h:form id="form">
+		
+
+			<p:dataTable paginator="true" rows="4" value="#{todosOsBugs.bugs}" var="bug"  styleClass="dados"
+				rowClasses="impar,par">
+
+				<p:column>
+					<f:facet name="header"> ID</f:facet>#{bug.id}
+						</p:column>
+
+				<p:column>
+					<f:facet name="header"> Sumário</f:facet>#{bug.sumario}
+						</p:column>
+
+				<p:column>
+					<f:facet name="header"> Status</f:facet>	#{bug.status}
+						</p:column>
+				<p:column>
+					<f:facet name="header"> Responsável</f:facet>	#{bug.responsavel.nome}
+						</p:column>
+				<p:column>
+					<f:facet name="header"> Reportado em</f:facet>
+					<h:outputText	value="#{bug.criadoEm}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+						</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
